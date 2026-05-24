@@ -18,8 +18,21 @@ foreach ($forge->servers()->iterate() as $server) {
 }
 ```
 
-`ListServersOptions` supports `size`, `cursor`, `sort`, and filters: `ipAddress`, `name`,
-`region`, `sizeFilter`, `provider`, `ubuntuVersion`, `phpVersion`, `databaseType`.
+`ListServersOptions` parameters:
+
+| Parameter | Query | Notes |
+|-----------|-------|-------|
+| `size` | `page[size]` | results per page |
+| `cursor` | `page[cursor]` | pagination cursor |
+| `sort` | `sort` | e.g. `-created_at` |
+| `ipAddress` | `filter[ip_address]` | |
+| `name` | `filter[name]` | |
+| `region` | `filter[region]` | |
+| `sizeFilter` | `filter[size]` | named `sizeFilter` to avoid clashing with `size` (pagination) |
+| `provider` | `filter[provider]` | |
+| `ubuntuVersion` | `filter[ubuntu_version]` | |
+| `phpVersion` | `filter[php_version]` | |
+| `databaseType` | `filter[database_type]` | |
 
 ## Get
 

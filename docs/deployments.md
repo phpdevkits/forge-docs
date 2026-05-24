@@ -19,7 +19,16 @@ $page = $site->deployments()->all(new ListDeploymentsOptions(commitAuthor: 'jane
 $deployment = $site->deployment($deploymentId)->get();   // Deployment DTO (nested commit)
 ```
 
-`ListDeploymentsOptions` supports `sort` and `filter[commit_hash|commit_message|commit_author]`.
+`ListDeploymentsOptions` parameters:
+
+| Parameter | Query | Notes |
+|-----------|-------|-------|
+| `size` | `page[size]` | results per page |
+| `cursor` | `page[cursor]` | pagination cursor |
+| `sort` | `sort` | e.g. `-created_at` |
+| `commitHash` | `filter[commit_hash]` | |
+| `commitMessage` | `filter[commit_message]` | |
+| `commitAuthor` | `filter[commit_author]` | |
 
 ## Trigger a deploy
 

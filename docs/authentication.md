@@ -50,8 +50,28 @@ Calling an org-scoped resource with no organization bound throws `OrganizationNo
 
 ## Errors
 
-Every non-2xx response throws a typed exception extending `ForgeException`:
-`BadRequestException` (400), `UnauthorizedException` (401), `ForbiddenException` (403),
-`NotFoundException` (404), `ValidationException` (422, exposes `->errors()`),
-`RateLimitException` (429), `ServerException` (5xx), and `ConnectionException` for
-network-layer failures.
+Every non-2xx response throws a typed exception. All extend `ForgeException`, so you can catch the whole family or a specific case:
+
+| Status | Exception | Notes |
+|--------|-----------|-------|
+| 400 | `BadRequestException` | |
+| 401 | `UnauthorizedException` | bad or missing token |
+| 403 | `ForbiddenException` | token lacks the required scope |
+| 404 | `NotFoundException` | |
+| 422 | `ValidationException` | exposes `->errors()` (field → messages) |
+| 429 | `RateLimitException` | |
+| 5xx | `ServerException` | |
+| — | `ConnectionException` | network-layer failure (no HTTP response) |
+| — | `OrganizationNotSetException` | client-side guard — thrown before any request when an org-scoped call has no organization bound |
+
+```php
+use PhpDevKits\ForgeSdk\Exceptions\{ForgeException, ValidationException};
+
+try {
+    $forge->servers()->create($data);
+} catch (ValidationException $e) {
+    $messages = $e->errors();        // ['name' => ['The name field is required.'], ...]
+} catch (ForgeException $e) {
+    report($e);                      // any other Forge error
+}
+```

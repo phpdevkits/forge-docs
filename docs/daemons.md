@@ -16,7 +16,16 @@ $page   = $forge->server($serverId)->daemons()->all(new ListDaemonsOptions(user:
 $daemon = $forge->server($serverId)->daemon($daemonId)->get();   // Daemon DTO
 ```
 
-`ListDaemonsOptions` supports `sort` and `filter[user|site_id|directory]`.
+`ListDaemonsOptions` parameters:
+
+| Parameter | Query | Notes |
+|-----------|-------|-------|
+| `size` | `page[size]` | results per page |
+| `cursor` | `page[cursor]` | pagination cursor |
+| `sort` | `sort` | e.g. `-created_at` |
+| `user` | `filter[user]` | |
+| `siteId` | `filter[site_id]` | |
+| `directory` | `filter[directory]` | |
 
 ## Create
 

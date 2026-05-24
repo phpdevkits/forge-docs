@@ -16,6 +16,15 @@ $page = $forge->server($serverId)->sshKeys()->all(new ListSshKeysOptions(user: '
 $key  = $forge->server($serverId)->sshKey($keyId)->get();   // SshKey DTO
 ```
 
+`ListSshKeysOptions` parameters:
+
+| Parameter | Query | Notes |
+|-----------|-------|-------|
+| `size` | `page[size]` | results per page |
+| `cursor` | `page[cursor]` | pagination cursor |
+| `name` | `filter[name]` | |
+| `user` | `filter[user]` | |
+
 ## Create
 
 ```php

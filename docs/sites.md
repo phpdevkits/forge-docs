@@ -19,6 +19,15 @@ $site = $forge->server($serverId)->site($siteId)->get();   // Site DTO
 
 A `Site` carries nested `repository` and `maintenanceMode` value objects.
 
+`ListSitesOptions` parameters:
+
+| Parameter | Query | Notes |
+|-----------|-------|-------|
+| `size` | `page[size]` | results per page |
+| `cursor` | `page[cursor]` | pagination cursor |
+| `sort` | `sort` | e.g. `-created_at` |
+| `name` | `filter[name]` | |
+
 ## Create
 
 ```php
